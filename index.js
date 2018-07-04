@@ -2,17 +2,14 @@ const express = require('express')
 const app = express()
 const router = express.Router()
 const path = require('path')
-const requestify = require('requestify');
+const fs = require('fs');
 const PORT = process.env.PORT || 5000
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-requestify.get('https://raw.githubusercontent.com/jozefchmelar/slovensky-kalendar-menin/master/sk-meniny.csv')
-  .then(response => {
-    var namedays = response.getBody().split("\n")
-    namedays.shift()
-    var nameDaysDictionary = {}
-    
+fs.readFile('sk-meniny.csv','utf8', (err,data) => {
+    var namedays = data.split("\n")
+    var nameDaysDictionary = {}    
     namedays.forEach(nameday => {
       const month = Number(nameday.split(",")[0].split("-")[0])
       const day   = Number(nameday.split(",")[0].split("-")[1])
@@ -35,12 +32,4 @@ requestify.get('https://raw.githubusercontent.com/jozefchmelar/slovensky-kalenda
     })
 
     app.listen(PORT, () => console.log(`Listening on ${PORT}`))
-  })  
-  .catch(err => {
-    app.get('*', (req,res)=>{
-      res.json({"error" : err})
-    })
-    app.listen(PORT, () => console.log(`Listening on ${PORT}`))
-
-  }
-  );
+  }) ;
