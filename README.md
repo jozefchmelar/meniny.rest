@@ -15,3 +15,5 @@ https://meniny.herokuapp.com/month/3/day/19
 ```json
 {"nameday":"Jozef"}
 `
+
+namedays from https://github.com/spacek/slovensky-kalendar-menin
