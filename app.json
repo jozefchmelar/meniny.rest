@@ -1,0 +1,8 @@
+{
+  "name": "meniny.rest",
+  "description": "REST API for Slovak namedays / REST API pre meniny na slovensku",
+  "repository": "https://github.com/jozefchmelar/meniny.rest",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "express", "heroku","dsl.sk"],
+  "image": "heroku/nodejs"
+}
