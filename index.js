@@ -22,8 +22,12 @@ requestify.get('https://raw.githubusercontent.com/jozefchmelar/slovensky-kalenda
     });        
 
     app.get('/', (req,res)=>{
-      res.send("hello")
+      const today = new Date();
+      const month = Number(today.getMonth()+1)
+      const day = Number(today.getDate())
+      res.json({ "nameday" : nameDaysDictionary[month+ "" +day]})
     })
+
     app.get('/month/:mesiac/day/:den', (req,res) => {
       const month = Number(req.params.mesiac)
       const day   = Number(req.params.den)
@@ -31,7 +35,7 @@ requestify.get('https://raw.githubusercontent.com/jozefchmelar/slovensky-kalenda
     })
 
     app.listen(PORT, () => console.log(`Listening on ${PORT}`))
-  })
+  })  
   .catch(err => {
     app.get('*', (req,res)=>{
       res.json({"error" : err})
